@@ -1,0 +1,34 @@
+.skills {
+  margin: 2rem auto;
+  max-width: 900px;
+  padding: 2rem;
+  background-color: #1a1a2e;
+  border-radius: 12px;
+}
+
+.skills h2 {
+  color: #00bcd4;
+  margin-bottom: 1rem;
+}
+
+.skills ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 1rem;
+  padding: 0;
+}
+
+.skill-item {
+  background: #27293d;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+  transform: scale(1.1);
+  background-color: #00bcd4;
+  color: #000;
+}

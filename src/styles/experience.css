@@ -1,0 +1,36 @@
+.experience {
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  background-color: #1e1e2f;
+  border-radius: 12px;
+}
+
+.experience h2 {
+  color: #00bcd4;
+}
+
+.job {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-left: 4px solid #00bcd4;
+  background-color: #2c2e44;
+  transition: background 0.3s ease;
+}
+
+.job:hover {
+  background-color: #3a3d5c;
+}
+
+.job h3 {
+  margin: 0;
+  color: #ffffff;
+}
+.job h4 {
+  margin: 0;
+  color: #ffffff;
+}
+.job p {
+  margin: 0;
+  color: #ffffff;
+}

@@ -1,7 +1,22 @@
 .header {
-  text-align: center;
+  margin: 2rem auto;
   padding: 2rem;
-  background: linear-gradient(90deg, #1f1c2c, #928dab);
-  color: white;
-  border-bottom: 1px solid #333;
+  max-width: 900px;
+  background-color: #1a1a2e;
+  border-radius: 12px;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #00bcd4;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin-top: 0.5rem;
 }

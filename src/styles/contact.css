@@ -1,0 +1,39 @@
+.contact {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 900px;
+  background-color: #1a1a2e;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.contact h2 {
+  color: #00bcd4;
+  margin-bottom: 1.5rem;
+}
+
+.contact-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.contact-icons a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #27293d;
+  color: #00bcd4;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.contact-icons a:hover {
+  background-color: #00bcd4;
+  color: #000;
+  transform: translateY(-3px);
+}
