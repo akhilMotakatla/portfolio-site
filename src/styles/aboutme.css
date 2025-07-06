@@ -1,0 +1,25 @@
+.about-me {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #1e1e2f;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+.about-me:hover {
+  transform: translateY(-5px);
+}
+
+.about-me h2 {
+  font-size: 2rem;
+  color: #00bcd4;
+  margin-bottom: 1rem;
+}
+
+.about-me p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #e0e0e0;
+}

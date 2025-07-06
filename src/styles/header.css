@@ -1,0 +1,7 @@
+.header {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(90deg, #1f1c2c, #928dab);
+  color: white;
+  border-bottom: 1px solid #333;
+}
