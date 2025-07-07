@@ -1,12 +1,16 @@
-// src/components/Header.js
 import React from 'react';
 import '../styles/header.css';
 
 function Header() {
   return (
     <header className="header">
-      <h1>Akhil Reddy Motakatla</h1>
-      <p>Full Stack Developer | Data Engineer | Cloud Enthusiast</p>
+      <div className="header-content">
+        <img src="/profile.png" alt="Akhil Reddy" className="profile-pic" />
+        <div className="header-text">
+          <h1>Akhil Reddy Motakatla</h1>
+          <p>Full Stack Developer | Data Engineer | Cloud Enthusiast</p>
+        </div>
+      </div>
     </header>
   );
 }

@@ -23,3 +23,11 @@
   line-height: 1.7;
   color: #e0e0e0;
 }
+.about {
+  background-color: #1a1a2e;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 600px;
+  color: white;
+}
+

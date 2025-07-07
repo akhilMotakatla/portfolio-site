@@ -4,19 +4,39 @@
   max-width: 900px;
   background-color: #1a1a2e;
   border-radius: 12px;
-  text-align: center;
-  color: #ffffff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-.header h1 {
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.profile-pic {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00bcd4;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.header-text {
+  color: #ffffff;
+  text-align: left;
+}
+
+.header-text h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: #00bcd4;
 }
 
-.header p {
-  font-size: 1.2rem;
+.header-text p {
+  font-size: 1.1rem;
   color: #e0e0e0;
   margin-top: 0.5rem;
 }

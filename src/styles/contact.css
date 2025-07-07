@@ -1,39 +1,95 @@
 .contact {
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 1rem auto;
+  padding: 1.5rem 1rem 2rem;   /* Less top padding, more bottom */
   max-width: 900px;
   background-color: #1a1a2e;
   border-radius: 12px;
   text-align: center;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.1); /* subtle glow border */
 }
+
 
 .contact h2 {
   color: #00bcd4;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;    /* Reduced from 1.5rem */
+  font-size: 2.5rem;      /* Slightly smaller and cleaner */
+  letter-spacing: 1px;
 }
 
 .contact-icons {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 1rem 2rem;            /* tighter vertical spacing, more horizontal gap */
+  padding-top: 1rem;         /* space below heading */
 }
+
+
+
+/* Individual icon colors */
+.contact-icons a.email svg {
+  color: #D44638; /* Gmail red */
+}
+.contact-icons a.linkedin svg {
+  color: #0A66C2; /* LinkedIn blue */
+}
+.contact-icons a.github svg {
+  color: #da700e; /* GitHub dark gray */
+}
+.contact-icons a.whatsapp svg {
+  color: #25D366; /* WhatsApp green */
+}
+.contact-icons a.instagram svg {
+  color: #E1306C; /* Instagram pink */
+}
+.contact-icons a.twitter svg {
+  color: #e4eaee; /* Twitter blue */
+}
+
+
 
 .contact-icons a {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  background-color: #27293d;
-  color: #00bcd4;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  text-decoration: none;
+  background: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  flex-direction: column;
 }
 
-.contact-icons a:hover {
-  background-color: #00bcd4;
-  color: #000;
-  transform: translateY(-3px);
+
+
+/* Icon size */
+.contact-icons a svg {
+  width: 80px;
+  height: 80px;
+  padding: 0;                  /* remove inside spacing */
+  margin: 0;
+  border: none;
+  background: none;           /* fully removes any background */
+  box-shadow: none;           /* removes glow */
+  border-radius: 0;
+  display: block;
+  transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
+
+
+/* When hovering on the container, dim other icons */
+.contact-icons:hover a:not(:hover) {
+  transform: scale(0.85);
+  opacity: 0.6;
+}
+
+.contact-icons a:hover svg {
+  transform: scale(1.3);
+  
+}
+.contact-icons a.x svg {
+  color: #ffffff; /* or the new X brand color if preferred */
+}
+
+
+
+
