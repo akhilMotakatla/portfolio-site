@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Trips from './components/Trips';
+import WhatILike from './components/WhatILike';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Experience />
       <Projects />
       <Trips />
+      <WhatILike />
     </div>
   );
 }
