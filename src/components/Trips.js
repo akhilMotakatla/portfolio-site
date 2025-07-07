@@ -4,32 +4,32 @@ import '../styles/trips.css';
 const trips = [
   {
     place: 'New York City',
-    image: '/newyork.png',
+    image: '/trips/newyork.png',
     description: 'Explored the skyline, Times Square, and Central Park.'
   },
   {
     place: 'Lousiana',
-    image: '/lousiana.png',
+    image: '/trips/lousiana.png',
     description: 'Visited Golden Gate Bridge and Silicon Valley.'
   },
   {
     place: 'Georgia',
-    image: '/georgia.png',
+    image: '/trips/georgia.png',
     description: 'Deep-dish pizza and the Cloud Gate!'
   },
   {
     place: 'Florida',
-    image: '/florida.png',
+    image: '/trips/florida.png',
     description: 'Rainy days and amazing coffee at Pike Place.'
   },
   {
     place: 'Missouri',
-    image: '/missouri.png',
+    image: '/trips/missouri.png',
     description: 'Rainy days and amazing coffee at Pike Place.'
   },
   {
     place: 'Texas',
-    image: '/texas.png',
+    image: '/trips/texas.png',
     description: 'Rainy days and amazing coffee at Pike Place.'
   },
 ];

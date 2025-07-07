@@ -15,9 +15,8 @@ function AboutMe() {
         I dabble in SQL, Python, and squeezing out every bit of performance 🚀. 
         Plus, I’m pretty good at explaining tech stuff without putting people to sleep 😴 and mentoring others along the way.
         Right now, I’m on the hunt for Software Developer or Data Engineer gigs where I can contribute, learn, and maybe crack a few bad coding jokes along the way 😄💻.
-
-
       </p>
+      
     </section>
   );
 }

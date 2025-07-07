@@ -4,7 +4,7 @@ import '../styles/experience.css';
 function Experience() {
   return (
     <section className="experience">
-      <h2>Experience</h2>
+      <h2>To Whom I Worked for</h2>
        <div className="job">
         <h3>University of North Texas</h3>
         <p>Graduate Teachign Fellow | 2022–2024</p>

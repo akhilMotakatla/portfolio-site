@@ -2,11 +2,12 @@
   padding: 2rem;
   margin: 2rem auto;
   max-width: 900px;
-  background-color: #1e1e2f;
+  background-color: #161625;
   border-radius: 12px;
 }
 
 .experience h2 {
+  text-align: center;
   color: #00bcd4;
 }
 

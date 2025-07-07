@@ -7,6 +7,7 @@ function Contact() {
   return (
     <section className="contact">
       <h2>Contact</h2>
+      
       <div className="contact-icons">
         <a href="mailto:akhilreddy7894112@example.com" target="_blank" rel="noreferrer" className="email">
           <FaEnvelope /> 

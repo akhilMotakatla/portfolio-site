@@ -12,12 +12,13 @@ function App() {
   return (
     <div className="App">
       <Header />
-
-      <div className="about-contact-wrapper">
-        <Contact />
+      <Contact />
+      <div className="main-sections">
+       
         <AboutMe />
+       
       </div>
-      <Skills />
+       <Skills />
       <Experience />
       <Projects />
       <Trips />
