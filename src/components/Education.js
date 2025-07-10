@@ -5,12 +5,11 @@ const educationData = [
   {
     institution: 'University of North Texas',
     degree: 'Master of Science in Computer Science',
-    duration: 'Aug 2023 – May 2025'
   },
   {
-    institution: 'Jawaharlal Nehru Technological University',
-    degree: 'Bachelor of Technology in Computer Science',
-    duration: 'Aug 2014 – May 2018'
+    institution: 'CMR College of Engineering and Technology',
+    degree: 'Bachelor of Technology in Electronics and Communication',
+    
   }
 ];
 
@@ -23,7 +22,7 @@ function Education() {
           <div className="education-card" key={index}>
             <h3 className="edu-institution">{edu.institution}</h3>
             <p className="edu-degree">{edu.degree}</p>
-            <p className="edu-duration">{edu.duration}</p>
+            
           </div>
         ))}
       </div>

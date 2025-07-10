@@ -38,11 +38,7 @@
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
   background-color: #24244a;
 }
-.projects-section:hover  {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+
 
 .project-title {
   font-size: 1.2rem;
