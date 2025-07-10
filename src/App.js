@@ -7,6 +7,7 @@ import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Trips from './components/Trips';
 import WhatILike from './components/WhatILike';
+import Education from './components/Education';
 
 
 function App() {
@@ -14,13 +15,10 @@ function App() {
     <div className="App">
       <Header />
       <Contact />
-      <div className="main-sections">
-       
-        <AboutMe />
-       
-      </div>
+      <AboutMe />
        <Skills />
       <Experience />
+      <Education />
       <Projects />
       <Trips />
       <WhatILike />

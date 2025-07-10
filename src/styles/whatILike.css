@@ -1,21 +1,10 @@
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .what-i-like {
   margin: 3rem auto;
   padding: 2rem;
-  max-width: 1000px;
-  background-color: #1a1a2e;
+  max-width: 1100px;
+  
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+  
   animation: fadeInUp 1s ease-in-out;
 }
 
