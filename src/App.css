@@ -1,38 +1,91 @@
+/* Reset and global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0a192f;
+  color: #ffffff;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
 .App {
+  text-align: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Section titles */
+section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #00bcd4;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
+/* Keyframe (if you're using a logo spin or animation) */
 @keyframes App-logo-spin {
-  from {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg);
+  }
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  section {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 1rem 0.5rem;
+  }
+
+  section h2 {
+    font-size: 2rem;
+  }
+
+  .timeline,
+  .skills-grid,
+  .like-grid,
+  .trip-grid,
+  .education-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .timeline-content,
+  .education-card-flip,
+  .trip-card,
+  .flip-card {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .timeline-logo,
+  .education-logo-big {
+    max-height: 120px;
+    object-fit: contain;
   }
 }
