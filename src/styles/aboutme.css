@@ -19,6 +19,11 @@
   font-size: 2rem;
   color: #00bcd4;
   margin-bottom: 1rem;
+  text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  text-align: center;     /* Center text */
+  width: 100%
 }
 
 .about-me p {

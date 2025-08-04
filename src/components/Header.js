@@ -10,7 +10,7 @@ function Header() {
         </div>
         <div className="header-text">
           <h1>Akhil Reddy Motakatla</h1>
-          <p>Full Stack Developer | Data Engineer | Cloud Enthusiast</p>
+          <p>Full Stack Developer | Cloud Enthusiast | Mentorship</p>
         </div>
       </div>
     </header>
