@@ -4,22 +4,22 @@ import '../styles/whatILike.css';
 const likes = [
   { 
     title: 'Exploring Tech', 
-    image: '/logos/tech.jpg',
+    image: `${process.env.PUBLIC_URL}/logos/tech.jpg`,
     description: 'I love diving into new technologies and experimenting with innovative tools.'
   },
   { 
     title: 'Building UIs', 
-    image: '/logos/ui.jpg',
+    image: `${process.env.PUBLIC_URL}/logos/ui.jpg`,
     description: 'Designing sleek, responsive interfaces is something I truly enjoy.'
   },
   { 
     title: 'Traveling', 
-    image: '/logos/travel.jpg',
+    image: `${process.env.PUBLIC_URL}/logos/travel.jpg`,
     description: 'Exploring different cultures and places helps me stay creative and inspired.'
   },
   { 
     title: 'Gaming', 
-    image: '/logos/gaming.jpg',
+    image: `${process.env.PUBLIC_URL}/logos/gaming.jpg`,
     description: 'I unwind by playing strategy and open-world games.'
   },
 ];

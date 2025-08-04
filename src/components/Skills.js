@@ -2,22 +2,20 @@ import React from 'react';
 import '../styles/skills.css';
 
 const skills = [
-  { name: 'React', img: '/skills/react.png' },
-  { name: '.NET', img: '/skills/dotnet.png' },
-  { name: 'Python', img: '/skills/python.png' },
-  { name: 'Azure', img: '/skills/azure.png' },
-  { name: 'SQL', img: '/skills/sql.png' },
- 
-  { name: 'JavaScript', img: '/skills/javascript.png' },
-  { name: 'HTML', img: '/skills/html.png' },
-  { name: 'CSS', img: '/skills/css.png' },
-  { name: 'C#', img: '/skills/csharp.png' },
-  { name: 'aws', img: '/skills/aws.png' },
-  { name: 'Node.js', img: '/skills/nodejs.png' },
-  { name: 'Docker', img: '/skills/docker.png' },
-  { name: 'GitHub', img: '/skills/github.png' },
-  { name: 'Kubernetes', img: '/skills/kubernetes.png' },
-
+  { name: 'React', img: `${process.env.PUBLIC_URL}/logos/react.png` },
+  { name: '.NET', img: `${process.env.PUBLIC_URL}/logos/dotnet.png` },
+  { name: 'Python', img: `${process.env.PUBLIC_URL}/logos/python.png` },
+  { name: 'Azure', img: `${process.env.PUBLIC_URL}/logos/azure.png` },
+  { name: 'SQL', img: `${process.env.PUBLIC_URL}/logos/sql.png` },
+  { name: 'JavaScript', img: `${process.env.PUBLIC_URL}/logos/javascript.png` },
+  { name: 'HTML', img: `${process.env.PUBLIC_URL}/logos/html.png` },
+  { name: 'CSS', img: `${process.env.PUBLIC_URL}/logos/css.png` },
+  { name: 'C#', img: `${process.env.PUBLIC_URL}/logos/csharp.png` },
+  { name: 'aws', img: `${process.env.PUBLIC_URL}/logos/aws.png` },
+  { name: 'Node.js', img: `${process.env.PUBLIC_URL}/logos/nodejs.png` },
+  { name: 'Docker', img: `${process.env.PUBLIC_URL}/logos/docker.png` },
+  { name: 'GitHub', img: `${process.env.PUBLIC_URL}/logos/github.png` },
+  { name: 'Kubernetes', img: `${process.env.PUBLIC_URL}/logos/kubernetes.png` },
 ];
 
 function Skills() {

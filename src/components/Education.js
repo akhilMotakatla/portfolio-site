@@ -5,12 +5,12 @@ const educationData = [
   {
     institution: 'University of North Texas',
     degree: 'Master of Science in Computer Science',
-    logo: '/logos/unt.png',
+    logo: `${process.env.PUBLIC_URL}/logos/unt.png`,
   },
   {
     institution: 'CMR College of Engineering and Technology',
     degree: 'Bachelor of Technology in Electronics and Communication',
-    logo: '/logos/cmr.png',
+    logo: `${process.env.PUBLIC_URL}/logos/cmr.png`,
   },
 ];
 
