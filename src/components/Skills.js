@@ -7,7 +7,7 @@ const skills = [
   { name: 'Python', img: '/skills/python.png' },
   { name: 'Azure', img: '/skills/azure.png' },
   { name: 'SQL', img: '/skills/sql.png' },
-  { name: 'Power BI', img: '/skills/powerbi.png' },
+ 
   { name: 'JavaScript', img: '/skills/javascript.png' },
   { name: 'HTML', img: '/skills/html.png' },
   { name: 'CSS', img: '/skills/css.png' },
