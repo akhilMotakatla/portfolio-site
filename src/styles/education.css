@@ -1,95 +1,56 @@
 .education-section {
-  padding: 60px 20px;
+margin: auto;
   color: #fff;
+  padding: 40px 20px;
 }
 
 .education-title {
-  font-size: 2rem;
-  color: #00bcd4;
-  margin-bottom: 1rem;
   text-align: center;
   font-size: 2.5rem;
-  letter-spacing: 1px;
-  text-align: center;     /* Center text */
-  width: 100%
+  color: #00bcd4;
+  margin-bottom: 1rem;
 }
 
 .education-cards {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;   
   gap: 40px;
-  justify-content: center;
-}
-
-.education-card-flip {
-  background: transparent;
-  width: 280px;
-  height: 280px;
-  perspective: 1000px; /* needed for 3D flip */
-  cursor: pointer;
-}
-
-.card-inner {
+  max-width: 1000px;     
+  margin: 0 auto;
   position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
+  padding-left: 0;       
+  justify-content: center; 
 }
 
-.education-card-flip:hover .card-inner {
-  transform: rotateY(180deg);
-}
 
-/* Front side */
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-  backface-visibility: hidden;
+
+.education-card {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: #1b263b;
+  background: #222c3d;
   padding: 20px;
-  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.2);
 }
 
-/* Front shows just the logo */
-.card-front {
-  z-index: 2;
-}
-
-/* Big logo styling */
-.education-logo-big {
-  width: 140px;
-  height: 140px;
-  object-fit: contain;
+.education-logo {
+  width: 80px;
+  height: 80px;
   background: white;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 10px;
-  box-shadow: 0 0 12px #00d4ffaa;
+  object-fit: contain;
+  margin-right: 20px;
 }
 
-/* Back side with text info */
-.card-back {
-  transform: rotateY(180deg);
-  flex-direction: column;
-  text-align: center;
-  padding: 30px 20px;
-}
-
-.edu-institution {
-  font-size: 1.3rem;
-  font-weight: 700;
+.education-details h3 {
+  margin: 0;
+  font-size: 1.2rem;
   color: #00d4ff;
-  margin-bottom: 12px;
 }
 
-.edu-degree {
+.education-details p {
+  margin: 5px 0 0;
+  color: #ccc;
   font-size: 1rem;
-  color: #c0c0c0;
-  line-height: 1.4;
 }

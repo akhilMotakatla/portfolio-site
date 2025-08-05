@@ -1,4 +1,4 @@
-// src/components/AboutMe.js
+
 import React from 'react';
 import '../styles/aboutme.css';
 
@@ -14,7 +14,7 @@ function AboutMe() {
         I’m all about building cool, scalable web apps, cloud-native stuff ☁️, and automating data pipelines like a pro 🤖. 
         I’ve got a knack for whipping up RESTful APIs, diving into microservices, and making data dance with Power BI and Azure Data Factory.
         Plus, I’m pretty good at explaining tech stuff without putting people to sleep 😴 and mentoring others along the way.
-        Right now, I’m on the hunt for Software Developer or Data Engineer gigs where I can contribute, learn, and maybe crack a few bad coding jokes along the way 😄💻.
+        Right now, I’m on the hunt for Software Developer or Data Engineer gigs where I can contribute, learn, and maybe crack a few bad coding jokes along the way 💻.
       </p>
       
     </section>

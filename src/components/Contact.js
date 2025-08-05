@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/contact.css';
-import { FaEnvelope, FaLinkedin,  FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { FaEnvelope, FaLinkedin, FaWhatsapp, FaInstagram, FaCalendarAlt } from 'react-icons/fa';
 import { RiTwitterXFill } from "react-icons/ri";
 
 function Contact() {
@@ -24,6 +24,10 @@ function Contact() {
         </a>
         <a href="https://x.com/motakatla_akhil" target="_blank" rel="noreferrer" className="twitter">
           <RiTwitterXFill /> 
+        </a>
+        <a
+          href="https://calendly.com/akhilreddymotakatla" target="_blank" rel="noreferrer" className="calender" >
+         <FaCalendarAlt />
         </a>
       </div>
     </section>

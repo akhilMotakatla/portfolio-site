@@ -7,7 +7,7 @@
   align-items: center;
   max-width: 1500px;
   
-  margin: 3rem auto 0 auto;   /* Center horizontally and add top margin */
+  margin: 3rem auto 0 auto;   
 }
 .header-content {
   display: flex;

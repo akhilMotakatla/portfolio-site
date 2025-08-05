@@ -20,15 +20,11 @@ function Education() {
       <h2 className="education-title">Education</h2>
       <div className="education-cards">
         {educationData.map(({ institution, degree, logo }, index) => (
-          <div className="education-card-flip" key={index}>
-            <div className="card-inner">
-              <div className="card-front">
-                <img src={logo} alt={`${institution} logo`} className="education-logo-big" />
-              </div>
-              <div className="card-back">
-                <h3 className="edu-institution">{institution}</h3>
-                <p className="edu-degree">{degree}</p>
-              </div>
+          <div className="education-card" key={index}>
+            <img src={logo} alt={`${institution} logo`} className="education-logo" />
+            <div className="education-details">
+              <h3>{institution}</h3>
+              <p>{degree}</p>
             </div>
           </div>
         ))}
