@@ -1,7 +1,8 @@
 import React from 'react';
 import '../styles/contact.css';
-import { FaEnvelope, FaLinkedin, FaWhatsapp, FaInstagram, FaCalendarAlt } from 'react-icons/fa';
+import {  FaLinkedin, FaWhatsapp, FaInstagram, FaCalendarAlt,FaGithub } from 'react-icons/fa';
 import { RiTwitterXFill } from "react-icons/ri";
+import { SiGmail } from "react-icons/si";
 
 function Contact() {
   return (
@@ -10,12 +11,14 @@ function Contact() {
       
       <div className="contact-icons">
         <a href="mailto:akhilreddy7894112@gmail.com" target="_blank" rel="noreferrer" className="email">
-          <FaEnvelope /> 
+          <SiGmail /> 
         </a>
         <a href="https://linkedin.com/in/akhil-reddy-motakatla" target="_blank" rel="noreferrer" className="linkedin">
           <FaLinkedin /> 
         </a>
-       
+        <a href="https://github.com/akhilmotakatla" target="_blank" rel="noreferrer" className="github">
+          <FaGithub />
+        </a>
         <a href="https://wa.me/19406296557" target="_blank" rel="noreferrer" className="whatsapp">
           <FaWhatsapp /> 
         </a>

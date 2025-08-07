@@ -3,15 +3,23 @@ import '../styles/projects.css';
 
 const projects = [
   {
-    title: 'E-commerce Analytics',
+    title: 'E-commerce Application',
     description: 'Built a dynamic dashboard using React and Snowflake for real-time analytics.'
   },
   {
-    title: 'Cloud Migration Tool',
+    title: 'Loan Management System',
     description: 'Automated migration of SQL workloads to Azure using Data Factory.'
   },
   {
     title: 'Portfolio Website',
+    description: 'Built this responsive portfolio with React, deployed via GitHub Pages.'
+  },
+  {
+    title: 'Motel Booking System',
+    description: 'Built this responsive portfolio with React, deployed via GitHub Pages.'
+  },
+  {
+    title: 'Cassandra Database ',
     description: 'Built this responsive portfolio with React, deployed via GitHub Pages.'
   }
 ];
