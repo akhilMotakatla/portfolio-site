@@ -36,7 +36,7 @@ const trips = [
 
 function Trips() {
   return (
-    <section className="trips">
+    <section id="trips" className="trips">
       <h2>Where did I Go!</h2>
       <div className="trip-grid">
         {trips.map((trip, index) => (
