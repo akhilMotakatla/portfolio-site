@@ -10,6 +10,7 @@ import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Education from './components/Education';
+import WhatILike from './components/WhatILike';
 import Trips from './components/Trips';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -38,9 +39,10 @@ function App() {
         <AboutMe />
         <Skills />
         <Experience />
-        <Trips />
         <Projects />
         <Education />
+        <WhatILike />
+        <Trips />
         <Contact />
       </main>
       <Footer />

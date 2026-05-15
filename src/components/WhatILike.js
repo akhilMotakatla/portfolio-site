@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/whatILike.css';
+import './WhatILike.css';
 
 const likes = [
   { 
@@ -26,21 +26,15 @@ const likes = [
 
 function WhatILike() {
   return (
-    <section className="what-i-like">
+    <section id="what-i-like" className="what-i-like">
       <h2>What I Like to Do</h2>
       <div className="like-grid">
         {likes.map((like, index) => (
-          <div className="card" key={index}>
-            <div className="card-inner">
-              <div className="card-front">
-                <img src={like.image} alt={like.title} />
-              </div>
-              <div className="card-back">
-                <h3>{like.title}</h3>
-                <p>{like.description}</p>
-              </div>
-            </div>
-          </div>
+          <article className="like-card" key={index}>
+            <h3>{like.title}</h3>
+            <img src={like.image} alt={like.title} />
+            <p>{like.description}</p>
+          </article>
         ))}
       </div>
     </section>

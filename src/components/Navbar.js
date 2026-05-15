@@ -7,9 +7,9 @@ const NAV_LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Trips', href: '#trips' },
   { label: 'Projects', href: '#projects' },
   { label: 'Education', href: '#education' },
+  { label: 'Trips', href: '#trips' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -20,6 +20,8 @@ const Navbar = ({ theme, toggleTheme }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
+    const sections = NAV_LINKS.map(link => link.href.replace('#', ''));
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setScrolled(scrollY > 50);
@@ -27,18 +29,33 @@ const Navbar = ({ theme, toggleTheme }) => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(totalHeight > 0 ? (scrollY / totalHeight) * 100 : 0);
 
-      const sections = NAV_LINKS.map(l => l.href.replace('#', ''));
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.getBoundingClientRect().top <= 100) {
-          setActiveSection(sections[i]);
+      const offset = 120;
+      let currentSection = '';
+
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= offset && rect.bottom > offset) {
+          currentSection = section;
           break;
         }
       }
+
+      if (!currentSection && window.innerHeight + scrollY >= document.documentElement.scrollHeight - 10) {
+        currentSection = sections[sections.length - 1];
+      }
+
+      setActiveSection(currentSection);
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   const handleNavClick = useCallback((href) => {
