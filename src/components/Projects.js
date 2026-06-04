@@ -188,7 +188,7 @@ const Projects = () => {
         </div>
 
         <div ref={ref} className="projects-grid">
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             {filtered.map((p, i) => (
               <ProjectCard key={p.title} project={p} inView={inView} index={i} />
             ))}
