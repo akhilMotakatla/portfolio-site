@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-import Loader from './components/Loader';
+import VideoIntro from './components/VideoIntro';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -17,7 +17,6 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
@@ -26,13 +25,14 @@ function App() {
 
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
 
-  if (loading) {
-    return <Loader onComplete={() => setLoading(false)} />;
-  }
-
   return (
     <div className="App">
       <CustomCursor />
+
+      {/* ── Cinematic video intro — always the first thing the visitor sees ── */}
+      <VideoIntro />
+
+      {/* ── Portfolio content — below the video ── */}
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Hero />

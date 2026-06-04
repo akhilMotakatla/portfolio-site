@@ -116,7 +116,7 @@ const Skills = () => {
         </div>
 
         <div ref={ref} className="skills-grid">
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             {filtered.map((skill, i) => (
               <SkillCard key={skill.name} skill={skill} inView={inView} index={i} />
             ))}
