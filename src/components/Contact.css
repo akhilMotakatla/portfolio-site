@@ -195,6 +195,35 @@ a.contact-item-value:hover { color: var(--primary); }
   right: 0;
 }
 
+/* ── Error state ── */
+.float-field.has-error .float-input {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.04);
+}
+
+.float-field.has-error .float-input:focus {
+  border-color: #ef4444;
+}
+
+.float-field.has-error .float-label {
+  color: #ef4444;
+}
+
+.float-field.has-error .float-border {
+  background: #ef4444;
+}
+
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #ef4444;
+  font-weight: 500;
+  padding-left: 4px;
+}
+
 /* Submit */
 .submit-btn {
   width: 100%;
