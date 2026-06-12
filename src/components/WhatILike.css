@@ -1,68 +1,212 @@
-.what-i-like {
-  margin: auto;
-  padding: 2rem 1rem;
-  max-width: 1200px;
-  border-radius: 16px;
-  animation: fadeInUp 1s ease-in-out;
+.wil-section {
+  background: var(--bg-primary);
+  overflow: hidden;
 }
 
-.what-i-like h2 {
-  font-size: 2.5rem;
-  color: #00bcd4;
-  margin-bottom: 2rem;
-  text-align: center;
-  letter-spacing: 1px;
-}
-
-.like-grid {
+.wil-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-  padding: 0 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
-.like-card {
+/* ── Card shell ── */
+.wil-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  height: 420px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.025);
+  cursor: default;
+  will-change: transform;
+  transition: transform 0.5s ease, box-shadow 0.4s ease, border-color 0.4s ease;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.25rem;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(15, 23, 42, 0.9);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  justify-content: flex-end;
 }
 
-.like-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0, 188, 212, 0.35);
+.wil-card:hover {
+  border-color: rgba(var(--card-color-rgb, 201,168,92), 0.35);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.7),
+    0 0 0 1px var(--card-color, #c9a85c) inset,
+    0 0 60px rgba(0,0,0,0.3);
 }
 
-.like-card h3 {
-  margin: 0;
-  font-size: 1.35rem;
-  color: #e2e8f0;
-  text-align: center;
+/* ── Cursor glow spotlight ── */
+.wil-card-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(60px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1;
 }
 
-.like-card img {
+/* ── Background image ── */
+.wil-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.wil-card-img {
   width: 100%;
-  height: 240px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 14px;
+  object-position: center;
+  transition: transform 0.6s ease, filter 0.6s ease;
+  filter: brightness(0.45) saturate(0.8);
+}
+
+.wil-card:hover .wil-card-img {
+  transform: scale(1.08);
+  filter: brightness(0.35) saturate(0.7);
+}
+
+.wil-card-img-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Floating emoji ── */
+.wil-emoji-wrap {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  z-index: 3;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(12px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wil-card:hover .wil-emoji-wrap {
+  transform: scale(1.15) translateY(-4px) rotateZ(-5deg);
+}
+
+.wil-emoji {
+  font-size: 1.8rem;
+  line-height: 1;
+  /* push the emoji slightly out of plane for depth */
+  transform: translateZ(20px);
   display: block;
 }
 
-.like-card p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #cbd5e1;
-  text-align: center;
+/* ── Card content ── */
+.wil-card-content {
+  position: relative;
+  z-index: 3;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translateY(16px);
+  transition: transform 0.4s ease;
 }
 
-@media (max-width: 540px) {
-  .like-card img {
-    height: 200px;
-  }
+.wil-card:hover .wil-card-content {
+  transform: translateY(0);
+}
+
+.wil-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.wil-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.wil-desc {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.65;
+  margin: 0;
+  /* Hidden until hover */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease 0.05s, max-height 0.4s ease;
+}
+
+.wil-card:hover .wil-desc {
+  opacity: 1;
+  max-height: 80px;
+}
+
+/* ── Tags ── */
+.wil-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
+}
+
+.wil-card:hover .wil-tags {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wil-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid;
+  letter-spacing: 0.04em;
+}
+
+/* ── Bottom accent bar ── */
+.wil-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  opacity: 0.7;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wil-card:hover .wil-bottom-bar {
+  transform: scaleX(1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .wil-grid { grid-template-columns: repeat(2, 1fr); }
+  .wil-card { height: 380px; }
+}
+
+@media (max-width: 600px) {
+  .wil-grid { grid-template-columns: 1fr; }
+  .wil-card { height: 340px; }
+  /* On touch devices always show content */
+  .wil-desc { opacity: 1; max-height: 80px; }
+  .wil-tags { opacity: 1; transform: translateY(0); }
 }
