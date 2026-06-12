@@ -5,12 +5,9 @@
   height: 100vh;
   overflow: hidden;
   background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* ── The video ── */
+/* ── Video ── */
 .vi-video {
   position: absolute;
   inset: 0;
@@ -26,147 +23,18 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.5) 100%),
+    radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.55) 100%),
     linear-gradient(to bottom,
-      rgba(0,0,0,0.2) 0%,
-      transparent 35%,
-      transparent 60%,
-      rgba(0,0,0,0.65) 100%
+      rgba(0,0,0,0.35) 0%,
+      transparent 30%,
+      transparent 55%,
+      rgba(0,0,0,0.8) 100%
     );
   pointer-events: none;
   z-index: 1;
 }
 
-/* ═══════════════════════════════════════
-   SPLASH SCREEN (before video plays)
-════════════════════════════════════════ */
-.vi-splash {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  background: #050510;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-/* Animated background rings */
-.vi-splash-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(99, 102, 241, 0.15);
-  animation: ring-expand 4s ease-in-out infinite;
-  pointer-events: none;
-}
-.vi-splash-ring-1 { width: 300px;  height: 300px;  animation-delay: 0s;    border-color: rgba(99,102,241,0.2); }
-.vi-splash-ring-2 { width: 550px;  height: 550px;  animation-delay: 1s;    border-color: rgba(168,85,247,0.12); }
-.vi-splash-ring-3 { width: 800px;  height: 800px;  animation-delay: 2s;    border-color: rgba(6,182,212,0.08); }
-
-@keyframes ring-expand {
-  0%, 100% { transform: scale(1);    opacity: 0.6; }
-  50%       { transform: scale(1.06); opacity: 1;   }
-}
-
-.vi-splash-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  text-align: center;
-  padding: 0 24px;
-}
-
-/* Logo badge */
-.vi-splash-logo {
-  width: 80px;
-  height: 80px;
-  border-radius: 22px;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.9rem;
-  font-weight: 900;
-  color: #fff;
-  margin-bottom: 8px;
-}
-
-.vi-splash-greeting {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
-}
-
-.vi-splash-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
-  font-weight: 900;
-  color: #fff;
-  line-height: 1.05;
-}
-
-.vi-splash-name span {
-  background: linear-gradient(135deg, #6366f1, #a855f7, #06b6d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.vi-splash-role {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.45);
-  letter-spacing: 0.03em;
-}
-
-/* Enter button */
-.vi-enter-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 40px;
-  margin-top: 10px;
-  border-radius: 100px;
-  border: none;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
-  color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 0 40px rgba(99,102,241,0.5), 0 0 80px rgba(99,102,241,0.2);
-  letter-spacing: 0.02em;
-  transition: box-shadow 0.3s ease;
-}
-
-.vi-enter-btn:hover {
-  box-shadow: 0 0 60px rgba(99,102,241,0.8), 0 0 100px rgba(99,102,241,0.3);
-}
-
-.vi-enter-play {
-  font-size: 0.85rem;
-  opacity: 0.85;
-}
-
-.vi-splash-hint {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-  margin-top: -6px;
-}
-
-/* ═══════════════════════════════════════
-   PLAYING PHASE — name overlay + bar
-════════════════════════════════════════ */
+/* ── Name overlay (bottom-left) ── */
 .vi-name-overlay {
   position: absolute;
   bottom: 90px;
@@ -180,7 +48,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 10px;
 }
 
@@ -191,11 +59,13 @@
   color: #fff;
   line-height: 1.05;
   margin-bottom: 14px;
-  text-shadow: 0 4px 40px rgba(0,0,0,0.5);
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
 }
 
 .vi-name span {
-  background: linear-gradient(135deg, #6366f1, #a855f7, #06b6d4);
+  background: linear-gradient(135deg, #c9a85c, #e8d48e, #a855f7, #6366f1);
+  background-size: 200% 100%;
+  animation: gradient-shift 5s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -204,31 +74,31 @@
 .vi-title {
   font-family: 'Inter', sans-serif;
   font-size: 0.95rem;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255, 255, 255, 0.55);
   letter-spacing: 0.03em;
 }
 
-/* Progress bar */
+/* ── Progress bar ── */
 .vi-progress-track {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   z-index: 3;
 }
 
 .vi-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #a855f7, #06b6d4);
+  background: linear-gradient(90deg, #6366f1, #a855f7, #c9a85c, #e8d48e);
+  background-size: 200% 100%;
+  animation: gradient-shift 3s ease infinite;
   transition: width 0.3s linear;
-  box-shadow: 0 0 10px rgba(99,102,241,0.8);
+  box-shadow: 0 0 12px rgba(201, 168, 92, 0.7), 0 0 24px rgba(99, 102, 241, 0.4);
 }
 
-/* ═══════════════════════════════════════
-   ENDED PHASE — Scroll CTA
-════════════════════════════════════════ */
+/* ── Scroll CTA (when video ends) ── */
 .vi-scroll-cta {
   position: absolute;
   bottom: 52px;
@@ -249,7 +119,7 @@
   width: 76px;
   height: 76px;
   border-radius: 50%;
-  border: 1.5px solid rgba(99,102,241,0.4);
+  border: 1.5px solid rgba(99, 102, 241, 0.4);
   pointer-events: none;
 }
 
@@ -264,12 +134,12 @@
   justify-content: center;
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 0 30px rgba(99,102,241,0.7), 0 0 60px rgba(99,102,241,0.3);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.7), 0 0 60px rgba(99, 102, 241, 0.3);
   transition: box-shadow 0.3s ease;
 }
 
 .vi-scroll-btn:hover {
-  box-shadow: 0 0 50px rgba(99,102,241,0.9), 0 0 90px rgba(99,102,241,0.4);
+  box-shadow: 0 0 50px rgba(99, 102, 241, 0.9), 0 0 90px rgba(99, 102, 241, 0.4);
 }
 
 .vi-scroll-label {
@@ -277,17 +147,15 @@
   font-size: 0.7rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .vi-name-overlay { bottom: 80px; left: 24px; right: 24px; }
   .vi-name { font-size: clamp(2rem, 8vw, 2.8rem); }
-  .vi-splash-name { font-size: clamp(2rem, 7vw, 3rem); }
 }
 
 @media (max-width: 480px) {
   .vi-name-overlay { left: 16px; right: 16px; bottom: 70px; }
-  .vi-enter-btn { padding: 14px 32px; font-size: 0.92rem; }
 }

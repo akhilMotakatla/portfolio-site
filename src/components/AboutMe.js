@@ -118,6 +118,8 @@ const AboutMe = () => {
                 variants={fadeUp(0.1 * i + 0.3)}
                 initial="hidden"
                 animate={inView ? 'show' : 'hidden'}
+                style={{ '--pillar-color': p.color }}
+                whileHover={{ x: 4 }}
               >
                 <div className="pillar-icon" style={{ color: p.color, background: `${p.color}18` }}>
                   {p.icon}

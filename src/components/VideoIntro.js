@@ -1,28 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowDown } from 'react-icons/fi';
 import './VideoIntro.css';
 
 const VideoIntro = () => {
   const videoRef = useRef(null);
-  const [phase, setPhase] = useState('splash'); // 'splash' | 'playing' | 'ended'
+  const [ended, setEnded] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  // User taps the Enter screen → play video with sound
-  const handleEnter = () => {
+  // Auto-play muted immediately on mount (browser requirement for autoplay)
+  useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    video.muted = false;
-    video.volume = 1;
-    video
-      .play()
-      .then(() => setPhase('playing'))
-      .catch(() => {
-        // Fallback: play muted if sound is still blocked
-        video.muted = true;
-        video.play().then(() => setPhase('playing'));
-      });
-  };
+    video.muted = true;
+    video.play().catch(() => {});
+  }, []);
 
   const handleTimeUpdate = () => {
     const v = videoRef.current;
@@ -36,7 +28,7 @@ const VideoIntro = () => {
   return (
     <div className="video-intro" id="intro">
 
-      {/* ── Video (preloaded but not auto-playing) ── */}
+      {/* ── Video — auto-plays muted immediately ── */}
       <video
         ref={videoRef}
         className="vi-video"
@@ -44,101 +36,41 @@ const VideoIntro = () => {
         playsInline
         preload="auto"
         onTimeUpdate={handleTimeUpdate}
-        onEnded={() => setPhase('ended')}
+        onEnded={() => setEnded(true)}
       />
 
-      {/* ── Vignette ── */}
+      {/* ── Cinematic vignette ── */}
       <div className="vi-vignette" />
 
-      {/* ── PHASE: Splash — Enter screen ── */}
+      {/* ── Name / title overlay ── */}
+      <motion.div
+        className="vi-name-overlay"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 1.1, ease: 'easeOut' }}
+      >
+        <p className="vi-greeting">Welcome to the portfolio of</p>
+        <h1 className="vi-name">
+          Akhil Reddy<br /><span>Motakatla</span>
+        </h1>
+        <p className="vi-title">Senior Full Stack Engineer · .NET · React · Azure · AWS</p>
+      </motion.div>
+
+      {/* ── Progress bar ── */}
+      {!ended && (
+        <div className="vi-progress-track">
+          <div className="vi-progress-fill" style={{ width: `${progress}%` }} />
+        </div>
+      )}
+
+      {/* ── Scroll CTA — appears when video ends ── */}
       <AnimatePresence>
-        {phase === 'splash' && (
+        {ended && (
           <motion.div
-            key="splash"
-            className="vi-splash"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            onClick={handleEnter}
-          >
-            {/* Animated background rings */}
-            <div className="vi-splash-ring vi-splash-ring-1" />
-            <div className="vi-splash-ring vi-splash-ring-2" />
-            <div className="vi-splash-ring vi-splash-ring-3" />
-
-            <motion.div
-              className="vi-splash-content"
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
-            >
-              <motion.div
-                className="vi-splash-logo"
-                animate={{ boxShadow: ['0 0 30px rgba(99,102,241,0.5)', '0 0 70px rgba(168,85,247,0.7)', '0 0 30px rgba(99,102,241,0.5)'] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                AR
-              </motion.div>
-
-              <p className="vi-splash-greeting">Welcome to the portfolio of</p>
-              <h1 className="vi-splash-name">
-                Akhil Reddy<br />
-                <span>Motakatla</span>
-              </h1>
-              <p className="vi-splash-role">Senior Full Stack Engineer · .NET · React · Azure · AWS</p>
-
-              <motion.button
-                className="vi-enter-btn"
-                onClick={handleEnter}
-                animate={{ scale: [1, 1.04, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="vi-enter-play">▶</span>
-                Enter Portfolio
-              </motion.button>
-
-              <p className="vi-splash-hint">Click to play intro with sound</p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ── PHASE: Playing — name overlay + progress bar ── */}
-      <AnimatePresence>
-        {phase === 'playing' && (
-          <>
-            <motion.div
-              key="overlay"
-              className="vi-name-overlay"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 1, ease: 'easeOut' }}
-            >
-              <p className="vi-greeting">Welcome to the portfolio of</p>
-              <h1 className="vi-name">
-                Akhil Reddy<br /><span>Motakatla</span>
-              </h1>
-              <p className="vi-title">Senior Full Stack Engineer · .NET · React · Azure · AWS</p>
-            </motion.div>
-
-            <div className="vi-progress-track">
-              <div className="vi-progress-fill" style={{ width: `${progress}%` }} />
-            </div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* ── PHASE: Ended — Scroll CTA ── */}
-      <AnimatePresence>
-        {phase === 'ended' && (
-          <motion.div
-            key="cta"
             className="vi-scroll-cta"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
           >
             <motion.div
               className="vi-scroll-ring"

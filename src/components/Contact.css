@@ -255,6 +255,13 @@ a.contact-item-value:hover { color: var(--primary); }
   font-weight: 500;
 }
 
+.form-error-msg {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #ef4444;
+  font-weight: 500;
+}
+
 @media (max-width: 1024px) {
   .contact-layout { grid-template-columns: 1fr; }
 }
