@@ -13,6 +13,21 @@
   gap: 24px;
 }
 
+/* Cursor spotlight glows */
+.edu-card-glow,
+.cert-card-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(60px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
 /* Degree Card */
 .edu-card {
   padding: 30px;
@@ -22,7 +37,9 @@
   gap: 20px;
   position: relative;
   overflow: hidden;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  cursor: default;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
 /* Left color bar */
@@ -205,9 +222,10 @@
   gap: 14px;
   cursor: default;
   border-left: 3px solid var(--cert-color, #c9a85c) !important;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
   position: relative;
   overflow: hidden;
+  will-change: transform;
 }
 
 .cert-card::after {
@@ -222,9 +240,8 @@
 .cert-card:hover::after { opacity: 1; }
 
 .cert-card:hover {
-  border-left-color: var(--gold) !important;
+  border-left-color: var(--cert-color, #c9a85c) !important;
   box-shadow: 0 4px 20px rgba(0,0,0,0.4), -3px 0 12px rgba(201,168,92,0.15);
-  transform: translateX(4px);
 }
 
 .cert-icon { font-size: 1.6rem; flex-shrink: 0; }

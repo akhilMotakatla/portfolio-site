@@ -114,7 +114,7 @@ const TripCard = ({ trip, index }) => {
         {/* Image */}
         <div className="trip-img-wrap">
           <img src={trip.image} alt={trip.place} className="trip-img-new" />
-          <div className="trip-img-gradient" style={{ background: `linear-gradient(to top, rgba(2,2,9,0.95) 0%, rgba(2,2,9,0.4) 50%, transparent 100%)` }} />
+          <div className="trip-img-gradient" style={{ background: `linear-gradient(to top, rgba(0,0,8,0.95) 0%, rgba(0,0,8,0.4) 50%, transparent 100%)` }} />
         </div>
 
         {/* Location pin badge */}

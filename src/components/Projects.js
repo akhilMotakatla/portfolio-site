@@ -83,72 +83,91 @@ const projects = [
 
 const ProjectCard = ({ project, inView, index }) => {
   const cardRef = useRef(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
-  const onMouseMove = (e) => {
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientY - rect.top) / rect.height - 0.5) * 12;
-    const y = -((e.clientX - rect.left) / rect.width - 0.5) * 12;
-    setTilt({ x, y });
+  const handleMouseMove = (e) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rotX = ((y - cy) / cy) * -8;
+    const rotY = ((x - cx) / cx) * 8;
+    card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
+    card.style.transition = 'transform 0.08s ease';
+    const glow = card.querySelector('.proj-card-glow');
+    if (glow) {
+      glow.style.left = `${x}px`;
+      glow.style.top = `${y}px`;
+      glow.style.opacity = '1';
+    }
   };
 
-  const onMouseLeave = () => setTilt({ x: 0, y: 0 });
+  const handleMouseLeave = () => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+    card.style.transition = 'transform 0.55s ease';
+    const glow = card.querySelector('.proj-card-glow');
+    if (glow) glow.style.opacity = '0';
+  };
 
   return (
     <motion.div
-      ref={cardRef}
-      className="proj-card glass-card"
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      style={{
-        '--proj-color': project.color,
-        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-        transition: tilt.x === 0 ? 'transform 0.5s ease' : 'none',
-      }}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      whileHover={{ scale: 1.01 }}
+      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+      animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: 40, filter: 'blur(8px)' }}
+      exit={{ opacity: 0, y: 20, filter: 'blur(4px)', transition: { duration: 0.3 } }}
+      transition={{ delay: index * 0.1, duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      <div className="proj-card-glow" style={{ background: project.color }} />
+      <div
+        ref={cardRef}
+        className="proj-card glass-card"
+        style={{ '--proj-color': project.color }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Cursor spotlight glow */}
+        <div className="proj-card-glow" style={{ background: project.color }} />
 
-      <div className="proj-header">
-        <div className="proj-icon-wrap" style={{ background: `${project.color}18`, color: project.color }}>
-          <span className="proj-icon">{project.icon}</span>
+        <div className="proj-header">
+          <div className="proj-icon-wrap" style={{ background: `${project.color}18`, color: project.color }}>
+            <span className="proj-icon">{project.icon}</span>
+          </div>
+          <div className="proj-links">
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className="proj-link-btn" aria-label="GitHub">
+                <FiGithub size={16} />
+              </a>
+            )}
+            {project.live && (
+              <a href={project.live} target="_blank" rel="noopener noreferrer" className="proj-link-btn" aria-label="Live demo">
+                <FiExternalLink size={16} />
+              </a>
+            )}
+          </div>
         </div>
-        <div className="proj-links">
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="proj-link-btn" aria-label="GitHub">
-              <FiGithub size={16} />
-            </a>
-          )}
-          {project.live && (
-            <a href={project.live} target="_blank" rel="noopener noreferrer" className="proj-link-btn" aria-label="Live demo">
-              <FiExternalLink size={16} />
-            </a>
-          )}
+
+        <div className="proj-body">
+          <p className="proj-subtitle">{project.subtitle}</p>
+          <h3 className="proj-title">{project.title}</h3>
+          <p className="proj-desc">{project.description}</p>
         </div>
-      </div>
 
-      <div className="proj-body">
-        <p className="proj-subtitle">{project.subtitle}</p>
-        <h3 className="proj-title">{project.title}</h3>
-        <p className="proj-desc">{project.description}</p>
-      </div>
+        <div className="proj-metrics">
+          {project.metrics.map(m => (
+            <span key={m} className="metric-badge" style={{ color: project.color, background: `${project.color}12`, borderColor: `${project.color}25` }}>
+              {m}
+            </span>
+          ))}
+        </div>
 
-      <div className="proj-metrics">
-        {project.metrics.map(m => (
-          <span key={m} className="metric-badge" style={{ color: project.color, background: `${project.color}12`, borderColor: `${project.color}25` }}>
-            {m}
-          </span>
-        ))}
-      </div>
-
-      <div className="proj-tech-row">
-        {project.tech.slice(0, 5).map(t => (
-          <span key={t} className="proj-tech-tag">{t}</span>
-        ))}
-        {project.tech.length > 5 && <span className="proj-tech-tag">+{project.tech.length - 5}</span>}
+        <div className="proj-tech-row">
+          {project.tech.slice(0, 5).map(t => (
+            <span key={t} className="proj-tech-tag">{t}</span>
+          ))}
+          {project.tech.length > 5 && <span className="proj-tech-tag">+{project.tech.length - 5}</span>}
+        </div>
       </div>
     </motion.div>
   );

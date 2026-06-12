@@ -24,8 +24,21 @@
   overflow: hidden;
   cursor: default;
   will-change: transform;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  backdrop-filter: blur(48px) saturate(200%) brightness(1.06);
+  -webkit-backdrop-filter: blur(48px) saturate(200%) brightness(1.06);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    inset 1px 0 rgba(255, 255, 255, 0.07),
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    0 24px 64px rgba(0, 0, 0, 0.45);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -49,44 +62,62 @@
 
 .proj-card:hover::before { opacity: 1; }
 
-/* Shimmer overlay */
+/* Liquid light sweep */
 .proj-card::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
-  transform: skewX(-15deg);
+  top: -50%;
+  left: -160%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 65%,
+    transparent 100%
+  );
+  transform: skewX(-10deg);
   pointer-events: none;
+  z-index: 2;
 }
 
 .proj-card:hover::after {
-  animation: shimmer-sweep 0.75s ease forwards;
+  animation: liquid-sweep 0.95s ease forwards;
 }
 
 .proj-card:hover {
-  background: rgba(255,255,255,0.04);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.09) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.18);
   transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 40px rgba(99,102,241,0.1);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    inset 1px 0 rgba(255, 255, 255, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    0 32px 80px rgba(0, 0, 0, 0.65),
+    0 0 40px rgba(99, 102, 241, 0.08);
 }
 
-/* Background glow spot */
+/* Cursor spotlight glow */
 .proj-card-glow {
   position: absolute;
-  top: -70px;
-  right: -70px;
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.06;
+  transform: translate(-50%, -50%);
+  filter: blur(65px);
+  opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
+  z-index: 1;
 }
-
-.proj-card:hover .proj-card-glow { opacity: 0.16; }
 
 .proj-header {
   display: flex;
