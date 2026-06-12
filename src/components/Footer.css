@@ -1,7 +1,35 @@
 .footer {
-  padding: 32px 24px;
-  border-top: 1px solid var(--border);
+  padding: 56px 24px 40px;
   background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated top divider */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #6366f1, #c9a85c, #a855f7, transparent);
+  background-size: 200% 100%;
+  animation: gradient-shift 5s ease infinite;
+  box-shadow: 0 0 12px rgba(201, 168, 92, 0.3);
+}
+
+/* Background glow */
+.footer::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 200px;
+  background: radial-gradient(ellipse, rgba(99,102,241,0.06), transparent 70%);
+  pointer-events: none;
 }
 
 .footer-content {
@@ -10,40 +38,60 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text-primary);
+  margin-bottom: 4px;
 }
 
 .footer-badge {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--gradient-1);
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #6366f1, #a855f7, #c9a85c);
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.78rem;
   font-weight: 800;
   color: white;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+}
+
+.footer-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,92,0.4), transparent);
+  margin: 4px 0;
 }
 
 .footer-copy {
   font-size: 0.82rem;
   color: var(--text-muted);
+  letter-spacing: 0.02em;
 }
 
 .footer-tagline {
-  font-size: 0.78rem;
-  color: var(--text-muted);
+  font-size: 0.76rem;
   font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, var(--text-muted), var(--gold), var(--text-muted));
+  background-size: 200% 100%;
+  animation: gradient-shift 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

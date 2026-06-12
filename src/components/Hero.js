@@ -5,11 +5,20 @@ import { FiGithub, FiLinkedin, FiMail, FiDownload, FiArrowDown } from 'react-ico
 import './Hero.css';
 
 const PARTICLE_CONFIG = {
-  count: 80,
-  maxSpeed: 0.4,
-  connectRadius: 120,
-  dotRadius: 1.5,
+  count: 100,
+  maxSpeed: 0.35,
+  connectRadius: 130,
+  dotRadius: 1.8,
+  mouseRadius: 160,
 };
+
+// Luxury particle colors — indigo, purple, gold
+const PARTICLE_COLORS = [
+  [99, 102, 241],   // indigo
+  [168, 85, 247],   // purple
+  [201, 168, 92],   // gold
+  [6, 182, 212],    // cyan (accent)
+];
 
 const useParticles = (canvasRef) => {
   useEffect(() => {
@@ -25,14 +34,18 @@ const useParticles = (canvasRef) => {
       canvas.height = canvas.offsetHeight;
     };
 
-    const createParticle = () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * PARTICLE_CONFIG.maxSpeed,
-      vy: (Math.random() - 0.5) * PARTICLE_CONFIG.maxSpeed,
-      r: Math.random() * PARTICLE_CONFIG.dotRadius + 0.5,
-      opacity: Math.random() * 0.4 + 0.1,
-    });
+    const createParticle = () => {
+      const color = PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)];
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * PARTICLE_CONFIG.maxSpeed,
+        vy: (Math.random() - 0.5) * PARTICLE_CONFIG.maxSpeed,
+        r: Math.random() * PARTICLE_CONFIG.dotRadius + 0.4,
+        opacity: Math.random() * 0.45 + 0.1,
+        color,
+      };
+    };
 
     const init = () => {
       resize();
@@ -42,6 +55,7 @@ const useParticles = (canvasRef) => {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Draw particles
       particles.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
@@ -50,37 +64,40 @@ const useParticles = (canvasRef) => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(99, 102, 241, ${p.opacity})`;
+        ctx.fillStyle = `rgba(${p.color[0]}, ${p.color[1]}, ${p.color[2]}, ${p.opacity})`;
         ctx.fill();
       });
 
+      // Draw connections between nearby particles
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < PARTICLE_CONFIG.connectRadius) {
-            const alpha = (1 - dist / PARTICLE_CONFIG.connectRadius) * 0.15;
+            const alpha = (1 - dist / PARTICLE_CONFIG.connectRadius) * 0.14;
+            const c = particles[i].color;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`;
+            ctx.lineWidth = 0.7;
             ctx.stroke();
           }
         }
 
+        // Mouse attraction lines in gold
         if (mouse.x !== null) {
           const dx = particles[i].x - mouse.x;
           const dy = particles[i].y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            const alpha = (1 - dist / 150) * 0.4;
+          if (dist < PARTICLE_CONFIG.mouseRadius) {
+            const alpha = (1 - dist / PARTICLE_CONFIG.mouseRadius) * 0.55;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(168, 85, 247, ${alpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(201, 168, 92, ${alpha})`;
+            ctx.lineWidth = 0.9;
             ctx.stroke();
           }
         }
@@ -112,8 +129,13 @@ const useParticles = (canvasRef) => {
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.15 + 0.3, duration: 0.6, ease: 'easeOut' } }),
+  hidden: { opacity: 0, y: 36, filter: 'blur(8px)' },
+  show: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { delay: i * 0.14 + 0.25, duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] },
+  }),
 };
 
 const Hero = () => {
@@ -128,6 +150,7 @@ const Hero = () => {
 
       <div className="hero-glow hero-glow-1" />
       <div className="hero-glow hero-glow-2" />
+      <div className="hero-glow-3" />
 
       <div className="hero-content">
         <div className="hero-left">
@@ -161,13 +184,13 @@ const Hero = () => {
           >
             <TypeAnimation
               sequence={[
-                'Senior Full Stack Developer', 2500,
-                '.NET & Cloud Engineer', 2500,
-                'React & Azure Specialist', 2500,
-                'Microservices Architect', 2500,
+                'Senior Full Stack Developer', 2800,
+                '.NET & Cloud Engineer', 2800,
+                'React & Azure Specialist', 2800,
+                'Microservices Architect', 2800,
               ]}
               wrapper="span"
-              speed={50}
+              speed={52}
               repeat={Infinity}
               className="typed-text"
             />
@@ -193,14 +216,26 @@ const Hero = () => {
             animate="show"
             custom={4}
           >
-            <a href="#contact" className="btn-primary" onClick={e => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>
+            <motion.a
+              href="#contact"
+              className="btn-primary"
+              onClick={e => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+            >
               <FiMail size={16} />
               Hire Me
-            </a>
-            <a href={process.env.PUBLIC_URL + "/logos/Akhil_Resume.pdf"} className="btn-outline" download>
+            </motion.a>
+            <motion.a
+              href={process.env.PUBLIC_URL + "/logos/Akhil_Resume.pdf"}
+              className="btn-outline"
+              download
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+            >
               <FiDownload size={16} />
               Download CV
-            </a>
+            </motion.a>
           </motion.div>
 
           <motion.div
@@ -222,7 +257,7 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 className="hero-social-btn"
                 aria-label={s.label}
-                whileHover={{ scale: 1.15, y: -3 }}
+                whileHover={{ scale: 1.18, y: -4 }}
                 whileTap={{ scale: 0.9 }}
               >
                 {s.icon}
@@ -233,22 +268,26 @@ const Hero = () => {
 
         <motion.div
           className="hero-right"
-          initial={{ opacity: 0, scale: 0.7 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.8, ease: 'backOut' }}
+          initial={{ opacity: 0, scale: 0.65, filter: 'blur(20px)' }}
+          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+          transition={{ delay: 0.5, duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <div className="hero-image-wrapper">
             <div className="hero-image-ring hero-image-ring-1" />
             <div className="hero-image-ring hero-image-ring-2" />
             <div className="hero-image-ring hero-image-ring-3" />
             <div className="hero-image-container">
-              <img src={process.env.PUBLIC_URL + "/logos/profile.jpeg"} alt="Akhil Reddy Motakatla" className="hero-image" />
+              <img
+                src={process.env.PUBLIC_URL + "/logos/profile.jpeg"}
+                alt="Akhil Reddy Motakatla"
+                className="hero-image"
+              />
             </div>
 
             <motion.div
               className="hero-float-card hero-float-card-1"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
             >
               <span className="float-card-icon">⚡</span>
               <div>
@@ -259,8 +298,8 @@ const Hero = () => {
 
             <motion.div
               className="hero-float-card hero-float-card-2"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
             >
               <span className="float-card-icon">🚀</span>
               <div>
@@ -277,12 +316,12 @@ const Hero = () => {
         onClick={scrollToAbout}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 1.8 }}
       >
         <span>Scroll Down</span>
         <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
+          animate={{ y: [0, 7, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
         >
           <FiArrowDown size={18} />
         </motion.div>
