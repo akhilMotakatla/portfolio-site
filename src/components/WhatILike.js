@@ -113,7 +113,7 @@ const InterestCard = ({ item, index }) => {
         {/* Background image with overlay */}
         <div className="wil-card-bg">
           <img src={item.image} alt={item.title} className="wil-card-img" />
-          <div className="wil-card-img-overlay" style={{ background: `linear-gradient(to top, ${item.color}cc 0%, rgba(2,2,9,0.85) 100%)` }} />
+          <div className="wil-card-img-overlay" style={{ background: `linear-gradient(to top, ${item.color}cc 0%, rgba(0,0,8,0.85) 100%)` }} />
         </div>
 
         {/* 3D floating emoji */}
