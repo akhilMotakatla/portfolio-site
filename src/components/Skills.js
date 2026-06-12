@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import './Skills.css';
@@ -47,37 +47,76 @@ const GLOW_COLORS = {
 
 const SkillCard = ({ skill, inView, index }) => {
   const color = GLOW_COLORS[skill.cat] || '#6366f1';
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rotX = ((y - cy) / cy) * -6;
+    const rotY = ((x - cx) / cx) * 6;
+    card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.03)`;
+    card.style.transition = 'transform 0.08s ease';
+    const glow = card.querySelector('.skill-card-glow');
+    if (glow) {
+      glow.style.left = `${x}px`;
+      glow.style.top = `${y}px`;
+      glow.style.opacity = '1';
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+    card.style.transition = 'transform 0.5s ease';
+    const glow = card.querySelector('.skill-card-glow');
+    if (glow) glow.style.opacity = '0';
+  };
 
   return (
     <motion.div
-      className="skill-card glass-card"
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ delay: index * 0.04, duration: 0.4 }}
-      style={{ '--skill-color': color }}
-      whileHover={{ scale: 1.03, y: -4 }}
+      initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+      animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: 20, filter: 'blur(6px)' }}
+      exit={{ opacity: 0, y: 10, filter: 'blur(4px)', transition: { duration: 0.25 } }}
+      transition={{ delay: index * 0.04, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      <div className="skill-card-top">
-        <div className="skill-img-wrap">
-          <img src={skill.img} alt={skill.name} className="skill-img" />
+      <div
+        ref={cardRef}
+        className="skill-card glass-card"
+        style={{ '--skill-color': color }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Cursor spotlight glow */}
+        <div className="skill-card-glow" style={{ background: color }} />
+
+        <div className="skill-card-top">
+          <div className="skill-img-wrap">
+            <img src={skill.img} alt={skill.name} className="skill-img" />
+          </div>
+          <div className="skill-info">
+            <span className="skill-name">{skill.name}</span>
+            <span className="skill-pct">{skill.level}%</span>
+          </div>
         </div>
-        <div className="skill-info">
-          <span className="skill-name">{skill.name}</span>
-          <span className="skill-pct">{skill.level}%</span>
+        <div className="skill-bar-bg">
+          <motion.div
+            className="skill-bar-fill"
+            initial={{ width: 0 }}
+            animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
+            transition={{ delay: index * 0.04 + 0.3, duration: 1, ease: 'easeOut' }}
+            style={{ background: `linear-gradient(90deg, ${color}, ${color}99)` }}
+          />
         </div>
+        <span className="skill-cat-badge" style={{ color, background: `${color}15`, borderColor: `${color}30` }}>
+          {skill.cat}
+        </span>
       </div>
-      <div className="skill-bar-bg">
-        <motion.div
-          className="skill-bar-fill"
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-          transition={{ delay: index * 0.04 + 0.3, duration: 1, ease: 'easeOut' }}
-          style={{ background: `linear-gradient(90deg, ${color}, ${color}99)` }}
-        />
-      </div>
-      <span className="skill-cat-badge" style={{ color, background: `${color}15`, borderColor: `${color}30` }}>
-        {skill.cat}
-      </span>
     </motion.div>
   );
 };

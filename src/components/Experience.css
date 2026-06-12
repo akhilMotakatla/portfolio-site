@@ -61,6 +61,20 @@
   animation: glow-dot 2.5s ease-in-out infinite;
 }
 
+/* Cursor spotlight glow */
+.exp-card-glow {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(70px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
 /* Card */
 .exp-card {
   flex: 1;
@@ -69,7 +83,8 @@
   cursor: pointer;
   overflow: hidden;
   position: relative;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  transition: box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s ease;
 }
 
 .exp-card::before {
