@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiChevronDown, FiCalendar, FiMapPin } from 'react-icons/fi';
@@ -103,19 +103,68 @@ const experiences = [
 
 const ExperienceCard = ({ exp, index, inView }) => {
   const [expanded, setExpanded] = useState(index === 0);
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rotX = ((y - cy) / cy) * -4;
+    const rotY = ((x - cx) / cx) * 4;
+    card.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.01)`;
+    card.style.transition = 'transform 0.08s ease';
+    const glow = card.querySelector('.exp-card-glow');
+    if (glow) {
+      glow.style.left = `${x}px`;
+      glow.style.top = `${y}px`;
+      glow.style.opacity = '1';
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
+    card.style.transition = 'transform 0.55s ease';
+    const glow = card.querySelector('.exp-card-glow');
+    if (glow) glow.style.opacity = '0';
+  };
+
+  const handleClick = () => {
+    // Reset tilt instantly on click so accordion expand looks clean
+    const card = cardRef.current;
+    if (card) {
+      card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
+      card.style.transition = 'transform 0.3s ease';
+    }
+    setExpanded(e => !e);
+  };
 
   return (
     <motion.div
       className="exp-item"
-      initial={{ opacity: 0, x: -30 }}
-      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+      initial={{ opacity: 0, x: -30, filter: 'blur(6px)' }}
+      animate={inView ? { opacity: 1, x: 0, filter: 'blur(0px)' } : { opacity: 0, x: -30, filter: 'blur(6px)' }}
+      transition={{ delay: index * 0.1, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div className="exp-timeline-dot" style={{ borderColor: exp.color, boxShadow: `0 0 12px ${exp.color}60` }}>
         <div className="exp-dot-inner" style={{ background: exp.color }} />
       </div>
 
-      <div className="exp-card glass-card" onClick={() => setExpanded(e => !e)}>
+      <div
+        ref={cardRef}
+        className="exp-card glass-card"
+        onClick={handleClick}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Cursor spotlight glow */}
+        <div className="exp-card-glow" style={{ background: exp.color }} />
+
         <div className="exp-card-header">
           <div className="exp-logo-wrap">
             {exp.logo ? (
@@ -144,7 +193,7 @@ const ExperienceCard = ({ exp, index, inView }) => {
             className="exp-expand-btn"
             animate={{ rotate: expanded ? 180 : 0 }}
             transition={{ duration: 0.25 }}
-            onClick={e => { e.stopPropagation(); setExpanded(v => !v); }}
+            onClick={e => { e.stopPropagation(); handleClick(); }}
             aria-label="Toggle details"
           >
             <FiChevronDown size={18} />
