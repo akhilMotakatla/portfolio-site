@@ -1,40 +1,32 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiArrowDown, FiVolume2, FiVolumeX } from 'react-icons/fi';
+import { FiArrowDown } from 'react-icons/fi';
 import './VideoIntro.css';
 
 const VideoIntro = () => {
   const videoRef = useRef(null);
   const [ended, setEnded] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [muted, setMuted] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(false);
 
+  // Start muted immediately so video loads and plays in background
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    // Try unmuted autoplay first (works in some browsers / user-gesture contexts)
-    video.muted = false;
-    video.play().then(() => {
-      setMuted(false);
-    }).catch(() => {
-      // Browser blocked unmuted — fall back to muted autoplay
-      video.muted = true;
-      setMuted(true);
-      video.play().catch(() => {});
-    });
+    video.muted = true;
+    video.play().catch(() => {});
   }, []);
+
+  const handleEnterWithSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = false;
+    setSoundEnabled(true);
+  };
 
   const handleTimeUpdate = () => {
     const v = videoRef.current;
     if (v && v.duration) setProgress((v.currentTime / v.duration) * 100);
-  };
-
-  const toggleSound = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = !video.muted;
-    setMuted(video.muted);
   };
 
   const scrollIntoPortfolio = () => {
@@ -58,24 +50,48 @@ const VideoIntro = () => {
       {/* ── Cinematic vignette ── */}
       <div className="vi-vignette" />
 
-      {/* ── Sound toggle (always visible while video plays) ── */}
+      {/* ── Full-screen sound gate overlay ── */}
       <AnimatePresence>
-        {!ended && (
-          <motion.button
-            className={`vi-sound-btn${muted ? ' vi-sound-btn--muted' : ''}`}
-            onClick={toggleSound}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ delay: 1.2, duration: 0.4 }}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
-            title={muted ? 'Click for Sound' : 'Mute'}
+        {!soundEnabled && (
+          <motion.div
+            className="vi-sound-gate"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.65, ease: 'easeOut' }}
+            onClick={handleEnterWithSound}
           >
-            {muted ? <FiVolumeX size={16} /> : <FiVolume2 size={16} />}
-            <span>{muted ? 'Click for Sound' : 'Sound On'}</span>
-            {muted && <span className="vi-sound-pulse" />}
-          </motion.button>
+            <motion.div
+              className="vi-sound-gate-inner"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              {/* Animated sound wave rings */}
+              <div className="vi-gate-rings">
+                <motion.div className="vi-gate-ring" animate={{ scale: [1, 1.6, 1], opacity: [0.6, 0, 0.6] }} transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 0 }} />
+                <motion.div className="vi-gate-ring" animate={{ scale: [1, 1.6, 1], opacity: [0.6, 0, 0.6] }} transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }} />
+                <motion.div className="vi-gate-ring" animate={{ scale: [1, 1.6, 1], opacity: [0.6, 0, 0.6] }} transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }} />
+                <div className="vi-gate-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                  </svg>
+                </div>
+              </div>
+
+              <p className="vi-gate-label">Click anywhere for sound</p>
+              <p className="vi-gate-sub">Best experienced with audio</p>
+
+              <motion.div
+                className="vi-gate-btn"
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.94 }}
+              >
+                Enter with Sound
+              </motion.div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 
