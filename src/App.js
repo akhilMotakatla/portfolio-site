@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import VideoIntro from './components/VideoIntro';
+import SpaceBackground from './components/SpaceBackground';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -27,6 +28,9 @@ function App() {
 
   return (
     <div className="App">
+      {/* ── Immersive space background — fixed behind all content ── */}
+      <SpaceBackground />
+
       <CustomCursor />
 
       {/* ── Cinematic video intro — always the first thing the visitor sees ── */}

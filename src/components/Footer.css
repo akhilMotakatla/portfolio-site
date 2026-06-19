@@ -1,6 +1,6 @@
 .footer {
   padding: 56px 24px 40px;
-  background: var(--bg-secondary);
+  background: var(--bg-secondary-veil);
   position: relative;
   overflow: hidden;
 }

@@ -115,9 +115,9 @@ const ProjectCard = ({ project, inView, index }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-      animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: 40, filter: 'blur(8px)' }}
-      exit={{ opacity: 0, y: 20, filter: 'blur(4px)', transition: { duration: 0.3 } }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      exit={{ opacity: 0, y: 20, transition: { duration: 0.3 } }}
       transition={{ delay: index * 0.1, duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div

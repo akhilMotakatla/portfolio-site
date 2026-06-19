@@ -80,9 +80,9 @@ const SkillCard = ({ skill, inView, index }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
-      animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: 20, filter: 'blur(6px)' }}
-      exit={{ opacity: 0, y: 10, filter: 'blur(4px)', transition: { duration: 0.25 } }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      exit={{ opacity: 0, y: 10, transition: { duration: 0.25 } }}
       transition={{ delay: index * 0.04, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div
@@ -97,7 +97,7 @@ const SkillCard = ({ skill, inView, index }) => {
 
         <div className="skill-card-top">
           <div className="skill-img-wrap">
-            <img src={skill.img} alt={skill.name} className="skill-img" />
+            <img src={skill.img} alt={skill.name} className="skill-img" loading="lazy" />
           </div>
           <div className="skill-info">
             <span className="skill-name">{skill.name}</span>
