@@ -80,8 +80,8 @@ const EduCard = ({ edu, index, inView }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-      animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: 40, filter: 'blur(8px)' }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ delay: index * 0.15, duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div
@@ -96,7 +96,7 @@ const EduCard = ({ edu, index, inView }) => {
 
         <div className="edu-card-top">
           <div className="edu-logo-wrap">
-            <img src={edu.logo} alt={edu.institution} className="edu-logo" />
+            <img src={edu.logo} alt={edu.institution} className="edu-logo" loading="lazy" />
           </div>
           <div className="edu-info">
             <div className="edu-degree-badge" style={{ color: edu.color, background: `${edu.color}12`, borderColor: `${edu.color}30` }}>
@@ -161,8 +161,8 @@ const CertCard = ({ cert, index, inView }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20, filter: 'blur(6px)' }}
-      animate={inView ? { opacity: 1, x: 0, filter: 'blur(0px)' } : { opacity: 0, x: 20, filter: 'blur(6px)' }}
+      initial={{ opacity: 0, x: 20 }}
+      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
       transition={{ delay: 0.3 + index * 0.1, duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div

@@ -129,11 +129,10 @@ const useParticles = (canvasRef) => {
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 36, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 36 },
   show: (i = 0) => ({
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { delay: i * 0.14 + 0.25, duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] },
   }),
 };
@@ -268,8 +267,8 @@ const Hero = () => {
 
         <motion.div
           className="hero-right"
-          initial={{ opacity: 0, scale: 0.65, filter: 'blur(20px)' }}
-          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, scale: 0.65 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <div className="hero-image-wrapper">

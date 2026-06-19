@@ -3,8 +3,13 @@
   /* Ultra-dark backgrounds */
   --bg-primary: #000008;
   --bg-secondary: #02020c;
-  --bg-card: rgba(255, 255, 255, 0.05);
-  --bg-card-hover: rgba(255, 255, 255, 0.09);
+  --bg-card: rgba(6, 6, 14, 0.28);
+  --bg-card-hover: rgba(12, 12, 24, 0.42);
+
+  /* Translucent "veils" used on section backgrounds so the fixed
+     space background shows through while scrolling */
+  --bg-primary-veil: rgba(0, 0, 8, 0.38);
+  --bg-secondary-veil: rgba(2, 2, 12, 0.4);
 
   /* Borders */
   --border: rgba(255, 255, 255, 0.1);
@@ -56,7 +61,7 @@
   /* Misc */
   --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --nav-height: 70px;
-  --section-padding: 110px 0;
+  --section-padding: 64px 0;
 }
 
 [data-theme="light"] {
@@ -68,6 +73,8 @@
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-muted: #94a3b8;
+  --bg-primary-veil: rgba(248, 250, 252, 0.86);
+  --bg-secondary-veil: rgba(241, 245, 249, 0.86);
 }
 
 /* ===== Reset ===== */
@@ -107,7 +114,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; lin
 .section { padding: var(--section-padding); position: relative; overflow: hidden; }
 
 /* ===== Section Heading ===== */
-.section-header { text-align: center; margin-bottom: 72px; }
+.section-header { text-align: center; margin-bottom: 40px; }
 
 .section-tag {
   display: inline-flex;
@@ -138,10 +145,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; lin
 }
 
 .section-title {
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-size: clamp(1.7rem, 3.2vw, 2.3rem);
   font-weight: 800;
   color: var(--text-primary);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   letter-spacing: -0.02em;
 }
 
@@ -164,21 +171,20 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; lin
 .glass-card {
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.09) 0%,
-    rgba(255, 255, 255, 0.04) 50%,
-    rgba(255, 255, 255, 0.07) 100%
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.05) 100%
   );
-  backdrop-filter: blur(48px) saturate(200%) brightness(1.06);
-  -webkit-backdrop-filter: blur(48px) saturate(200%) brightness(1.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(180%) brightness(1.05);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
-    inset 1px 0 rgba(255, 255, 255, 0.07),
-    0 8px 24px rgba(0, 0, 0, 0.22),
-    0 24px 64px rgba(0, 0, 0, 0.5),
-    0 48px 96px rgba(0, 0, 0, 0.22);
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -0.5px 0 rgba(255, 255, 255, 0.03),
+    inset 0.5px 0 rgba(255, 255, 255, 0.05),
+    0 4px 18px rgba(0, 0, 0, 0.15),
+    0 12px 36px rgba(0, 0, 0, 0.35);
   transition: var(--transition);
   position: relative;
   overflow: hidden;
@@ -227,20 +233,19 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; lin
 .glass-card:hover {
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.13) 0%,
-    rgba(255, 255, 255, 0.06) 50%,
-    rgba(255, 255, 255, 0.10) 100%
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.08) 100%
   );
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-4px);
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.32),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
-    inset 1px 0 rgba(255, 255, 255, 0.1),
-    0 8px 24px rgba(0, 0, 0, 0.28),
-    0 32px 80px rgba(0, 0, 0, 0.65),
-    0 64px 128px rgba(0, 0, 0, 0.32),
-    0 0 60px rgba(99, 102, 241, 0.09);
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -0.5px 0 rgba(255, 255, 255, 0.05),
+    inset 0.5px 0 rgba(255, 255, 255, 0.07),
+    0 6px 24px rgba(0, 0, 0, 0.22),
+    0 20px 54px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(99, 102, 241, 0.08);
 }
 
 .glass-card:hover::after {

@@ -1,4 +1,4 @@
-.exp-section { background: var(--bg-secondary); }
+.exp-section { background: var(--bg-secondary-veil); }
 
 .exp-timeline {
   position: relative;
@@ -78,8 +78,8 @@
 /* Card */
 .exp-card {
   flex: 1;
-  padding: 26px;
-  border-radius: var(--radius-lg);
+  padding: 18px;
+  border-radius: var(--radius-md);
   cursor: pointer;
   overflow: hidden;
   position: relative;
@@ -109,9 +109,9 @@
 
 .exp-logo-wrap {
   flex-shrink: 0;
-  width: 54px;
-  height: 54px;
-  border-radius: 13px;
+  width: 44px;
+  height: 44px;
+  border-radius: 9px;
   overflow: hidden;
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--border);

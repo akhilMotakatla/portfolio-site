@@ -147,8 +147,8 @@ const ExperienceCard = ({ exp, index, inView }) => {
   return (
     <motion.div
       className="exp-item"
-      initial={{ opacity: 0, x: -30, filter: 'blur(6px)' }}
-      animate={inView ? { opacity: 1, x: 0, filter: 'blur(0px)' } : { opacity: 0, x: -30, filter: 'blur(6px)' }}
+      initial={{ opacity: 0, x: -30 }}
+      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
       transition={{ delay: index * 0.1, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div className="exp-timeline-dot" style={{ borderColor: exp.color, boxShadow: `0 0 12px ${exp.color}60` }}>
@@ -168,7 +168,7 @@ const ExperienceCard = ({ exp, index, inView }) => {
         <div className="exp-card-header">
           <div className="exp-logo-wrap">
             {exp.logo ? (
-              <img src={exp.logo} alt={exp.company} className="exp-logo" />
+              <img src={exp.logo} alt={exp.company} className="exp-logo" loading="lazy" />
             ) : (
               <div className="exp-initials" style={{ background: `${exp.color}20`, color: exp.color }}>
                 {exp.initials}

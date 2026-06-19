@@ -96,8 +96,8 @@ const TripCard = ({ trip, index }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ delay: index * 0.08, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
@@ -113,7 +113,7 @@ const TripCard = ({ trip, index }) => {
 
         {/* Image */}
         <div className="trip-img-wrap">
-          <img src={trip.image} alt={trip.place} className="trip-img-new" />
+          <img src={trip.image} alt={trip.place} className="trip-img-new" loading="lazy" />
           <div className="trip-img-gradient" style={{ background: `linear-gradient(to top, rgba(0,0,8,0.95) 0%, rgba(0,0,8,0.4) 50%, transparent 100%)` }} />
         </div>
 

@@ -95,8 +95,8 @@ const InterestCard = ({ item, index }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ delay: index * 0.1, duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
@@ -112,7 +112,7 @@ const InterestCard = ({ item, index }) => {
 
         {/* Background image with overlay */}
         <div className="wil-card-bg">
-          <img src={item.image} alt={item.title} className="wil-card-img" />
+          <img src={item.image} alt={item.title} className="wil-card-img" loading="lazy" />
           <div className="wil-card-img-overlay" style={{ background: `linear-gradient(to top, ${item.color}cc 0%, rgba(0,0,8,0.85) 100%)` }} />
         </div>
 

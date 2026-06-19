@@ -1,9 +1,9 @@
-.edu-section { background: var(--bg-secondary); }
+.edu-section { background: var(--bg-secondary-veil); }
 
 .edu-layout {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 32px;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
   align-items: start;
 }
 
@@ -30,11 +30,11 @@
 
 /* Degree Card */
 .edu-card {
-  padding: 30px;
-  border-radius: var(--radius-lg);
+  padding: 20px;
+  border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
   position: relative;
   overflow: hidden;
   will-change: transform;
@@ -77,11 +77,11 @@
 }
 
 .edu-logo-wrap {
-  width: 66px;
-  height: 66px;
-  border-radius: 14px;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
   background: white;
-  padding: 7px;
+  padding: 5px;
   flex-shrink: 0;
   display: flex;
   align-items: center;

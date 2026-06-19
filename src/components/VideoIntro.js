@@ -10,11 +10,30 @@ const VideoIntro = () => {
   const [soundEnabled, setSoundEnabled] = useState(false);
 
   // Start muted immediately so video loads and plays in background
+  // and register IntersectionObserver to pause decoding off-screen
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     video.muted = true;
     video.play().catch(() => {});
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.02 }
+    );
+
+    const introEl = document.getElementById('intro');
+    if (introEl) observer.observe(introEl);
+
+    return () => {
+      if (introEl) observer.unobserve(introEl);
+    };
   }, []);
 
   const handleEnterWithSound = () => {
